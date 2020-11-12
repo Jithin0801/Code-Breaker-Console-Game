@@ -41,11 +41,11 @@ def find_guess(code, user_code):
         for index, num in enumerate(user_code):
             guess_flag = 1
             if num == code[index]:
-                clue.append("One of the digits is a match :-)")
+                clue.append("One of the digits is a match!")
             elif num in code:
-                clue.append("You are close ;-)")
+                clue.append("You are close!")
             else:
-                clue.append("Not even close :-(")
+                clue.append("Not even close!")
         
     return clue
 
@@ -61,7 +61,7 @@ def game():
         elif "One of the digits is a match :-)" in guess:
             print("One of the digits is a match :-)")
         elif "You are close ;-)" in guess and "One of the digits is a match :-)" not in guess:
-            print("You are close ;-) That means one of the digit is correct but in wrong place!")
+            print("You are close ;-) That means one of the digits is correct but in wrong place!")
         else:
             print("Not even close :-(")
         
