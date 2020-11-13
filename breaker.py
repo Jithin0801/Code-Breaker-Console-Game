@@ -19,7 +19,7 @@ import random
 
 
 MATCH = "One of the digits is a match!"
-CLOSE = "You are close!"
+CLOSE = "You are close! One of the digit is a correct but in wrong position!"
 NOT_CLOSE = "Not even close!"
 CORRECT = "Oh! you got me correctly!"
 guess_flag = 0
