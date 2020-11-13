@@ -17,6 +17,11 @@
 import random
 
 
+
+MATCH = "One of the digits is a match!"
+CLOSE = "You are close!"
+NOT_CLOSE = "Not even close!"
+CORRECT = "Oh! you got me correctly!"
 guess_flag = 0
 def get_guess():
     global guess_flag
@@ -31,39 +36,41 @@ def generate_code():
     random.shuffle(l)
     return l[:3]
 
+def generate_result(clue):
+    return MATCH if MATCH in clue else CLOSE if CLOSE in clue else NOT_CLOSE
+
 
 def find_guess(code, user_code):
     global guess_flag
     clue = []
     if code == user_code:
-        clue.append("Oh! you got me correctly!")
+        return CORRECT
     else:
         for index, num in enumerate(user_code):
             guess_flag = 1
             if num == code[index]:
-                clue.append("One of the digits is a match!")
+                clue.append(MATCH)
             elif num in code:
-                clue.append("You are close!")
+                clue.append(CLOSE)
             else:
-                clue.append("Not even close!")
-        
-    return clue
+                clue.append(NOT_CLOSE)
+
+    result = generate_result(clue)
+
+    return result
 
 
 def game():
     guess = []
     code = generate_code()
-    while 'Oh! you got me correctly!' not in guess:
+    f = open("code.txt", "w")
+    st = "".join(code)
+    f.write(st)
+    f.close()
+    while guess != CORRECT:
         user_code = get_guess()
         guess = find_guess(code, user_code)
-        if "Oh! you got me correctly!" in guess:
-            print("Oh! you got me correctly!")
-        elif "One of the digits is a match :-)" in guess:
-            print("One of the digits is a match :-)")
-        elif "You are close ;-)" in guess and "One of the digits is a match :-)" not in guess:
-            print("You are close ;-) That means one of the digits is correct but in wrong place!")
-        else:
-            print("Not even close :-(")
+        print(guess)
         
 
 #Driver code
